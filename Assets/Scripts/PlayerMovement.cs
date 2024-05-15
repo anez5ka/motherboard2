@@ -23,13 +23,12 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         collide = GetComponent<BoxCollider2D>();
     }
+    
     private void Update()
     {
         //get axis horizontal = leva x prava sipka, output je z intervalu -1(leva spika) az 1(prava sipka)
         horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-
-
         //JUMP
         if (Input.GetKey(KeyCode.Space)&&IsGrounded())
         {
@@ -49,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
                 side = -1;
             }
         }
-
         //ANIMATOR PARAMETERS
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", IsGrounded());
@@ -66,27 +64,20 @@ public class PlayerMovement : MonoBehaviour
         }
         if (wallJumpCooldown < 0.1f)
         {
-
             if (OnWall() && !IsGrounded())
             {
                 body.gravityScale = 0;
                 body.velocity = Vector2.zero;
             }
-          
-
             if (Input.GetKey(KeyCode.Space) && OnWall())
             {
                 Jump();
             }
-
         }
         else
         {
             body.gravityScale = 1;
         }
-
-
-
     }
 
     private void Jump()
@@ -99,26 +90,27 @@ public class PlayerMovement : MonoBehaviour
         else if (OnWall())
         {
             body.velocity = new Vector2(side * speed, jumpPower);
-            
         }
     }
 
     //raycast vysila signal, jestli neni x daleko nejaky predmet
-
     private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size,0, Vector2.down,0.1f, groundLayer);
         return raycastHit.collider != null;
     }
+    
     private bool OnWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size, 0, new Vector2(-side,0), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
+    
     public bool canShoot()
     {
         return horizontalInput == 0 && IsGrounded() && !OnWall();
     }
+    
     //FACING SIDE
     public float Facingside()
     {
