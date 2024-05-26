@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private Animator anim;
     private float horizontalInput;
-    private PolygonCollider2D collide;
+    private BoxCollider2D collide;
     private float wallJumpCooldown;
     public float side;
 
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         // priradis komponenty k promennym
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        collide = GetComponent<PolygonCollider2D>();
+        collide = GetComponent<BoxCollider2D>();
     }
     
     private void Update()
