@@ -9,4 +9,8 @@ public class menuManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(0);
     }
+    public void Rules()
+    {
+        SceneManager.LoadSceneAsync(2);
+    }
 }

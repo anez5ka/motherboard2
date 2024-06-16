@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //tady Terka
     //serialize je stale private, ale muzes tu promennou upravovat v unity
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed;
