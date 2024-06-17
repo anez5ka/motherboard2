@@ -27,5 +27,4 @@ public class EndingMenu : MonoBehaviour
         Time.timeScale = 1;
         endingMenu.SetActive(false);
     }
-
 }

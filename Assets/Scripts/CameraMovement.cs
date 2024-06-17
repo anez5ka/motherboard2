@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
 
         if (System.Math.Abs(player.transform.position.x - transform.position.x) > 8)
         {
-            Debug.Log(player.transform.position.x + "  ;  " + transform.position.x + "  ;  " + ((System.Math.Round((player.transform.position.x / 16)))));
+            // Debug.Log(player.transform.position.x + "  ;  " + transform.position.x + "  ;  " + ((System.Math.Round((player.transform.position.x / 16)))));
             currentPositionX = System.Convert.ToSingle(System.Math.Round((player.transform.position.x / 16)) * 16f);
         }
 

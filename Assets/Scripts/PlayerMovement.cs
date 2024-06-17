@@ -8,15 +8,18 @@ public class PlayerMovement : MonoBehaviour
     //serialize je stale private, ale muzes tu promennou upravovat v unity
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private LayerMask obstructionLayer;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
     private EndingMenu menu;
+    private Health health;
     private Rigidbody2D body;
     private Animator anim;
     private float horizontalInput;
     private BoxCollider2D collide;
     private float wallJumpCooldown;
     public float side;
+    private float damageTimer = 10;
 
     private void Awake()
     {
@@ -25,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         collide = GetComponent<BoxCollider2D>();
+        health = GetComponent<Health>();
     }
     
     private void Update()
@@ -81,6 +85,17 @@ public class PlayerMovement : MonoBehaviour
         {
             body.gravityScale = 1;
         }
+
+        if (IsHit()&&damageTimer>2f)
+        {
+            health.TakeDamage(2f);
+            damageTimer = 0f;
+        }
+        else
+        {
+            damageTimer += Time.deltaTime;
+        }
+
         if (IsWinner())
         {
             Debug.Log("targettt");
@@ -117,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
     private bool IsWinner()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size, 0, new Vector2(0, 0), 0.1f, targetLayer);
+        return raycastHit.collider != null;
+    }
+
+    private bool IsHit()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size, 0, new Vector2(0, 0), 0.1f, obstructionLayer);
         return raycastHit.collider != null;
     }
 
