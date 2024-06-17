@@ -7,8 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     //serialize je stale private, ale muzes tu promennou upravovat v unity
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    private EndingMenu menu;
     private Rigidbody2D body;
     private Animator anim;
     private float horizontalInput;
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         // priradis komponenty k promennym
+        menu = GetComponent<EndingMenu>();
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         collide = GetComponent<BoxCollider2D>();
@@ -78,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
         {
             body.gravityScale = 1;
         }
+        if (IsWinner())
+        {
+            Debug.Log("targettt");
+            menu.Win();
+        }
     }
 
     private void Jump()
@@ -105,7 +113,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size, 0, new Vector2(-side,0), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
-    
+
+    private bool IsWinner()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(collide.bounds.center, collide.bounds.size, 0, new Vector2(0, 0), 0.1f, targetLayer);
+        return raycastHit.collider != null;
+    }
+
     public bool canShoot()
     {
         return horizontalInput == 0 && IsGrounded() && !OnWall();
