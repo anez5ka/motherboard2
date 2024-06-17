@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class EndingMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject endingMenu;
-    [SerializeField] private GameObject winner;
-    [SerializeField] private GameObject loser;
+    [SerializeField] GameObject endingMenu;
+    [SerializeField] GameObject winner;
+    [SerializeField] GameObject loser;
     public void Win()
     {
         endingMenu.SetActive(true);
