@@ -6,6 +6,10 @@ public class EndingMenu : MonoBehaviour
     [SerializeField] GameObject endingMenu;
     [SerializeField] GameObject winner;
     [SerializeField] GameObject loser;
+    private void Awake()
+    {
+        endingMenu.SetActive(false);
+    }
     public void Win()
     {
         endingMenu.SetActive(true);
@@ -21,10 +25,18 @@ public class EndingMenu : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    public void Next()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(3);
+        endingMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void Home()
     {
-        SceneManager.LoadScene(1);
         Time.timeScale = 1;
+        SceneManager.LoadScene(1);
         endingMenu.SetActive(false);
     }
 }

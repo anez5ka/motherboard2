@@ -8,6 +8,8 @@ public class menuManager : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadSceneAsync(0);
+        Time.timeScale = 1;
+        
     }
     public void Rules()
     {
