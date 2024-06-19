@@ -7,12 +7,12 @@ public class menuManager : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(2);
         Time.timeScale = 1;
         
     }
     public void Rules()
     {
-        SceneManager.LoadSceneAsync(2);
+        SceneManager.LoadSceneAsync(1);
     }
 }

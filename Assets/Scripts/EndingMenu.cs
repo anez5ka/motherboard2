@@ -36,7 +36,7 @@ public class EndingMenu : MonoBehaviour
     public void Home()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
         endingMenu.SetActive(false);
     }
 }

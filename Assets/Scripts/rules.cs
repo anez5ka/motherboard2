@@ -7,6 +7,6 @@ public class rules : MonoBehaviour
 {
     public void close()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(0);
     }
 }
